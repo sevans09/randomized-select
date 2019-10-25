@@ -6,7 +6,6 @@
 #
 #    includes functions provided and function students need to implement
 #
-#    Sook-Hee Evans
 ##########################################################################
 
 import random
@@ -18,10 +17,10 @@ def randSelect(ray, index):
 	newRank, ray = partition(ray, pivot)
 	if newRank > index:
 		print("Selected", ray[newRank], "as the pivot; its rank is",newRank,"; Thus, we recurse on the left", "\n")
-		return randSelect(ray[0:newRank], index)
+		return randSelect(ray[0:newRank ], index)
 	elif newRank < index:
 		print("Selected", ray[newRank], "as the pivot; its rank is",newRank,"; Thus, we recurse on the right", "\n")
-		return randSelect(ray[newRank +2:], index - newRank - 1)
+		return randSelect(ray[newRank + 1:len(ray)], index - newRank - 1)
 	else:
 		print("Selected", ray[newRank], "as the pivot; its rank is",newRank,"; Thus, we recurse on nothing. We are done.")
 		return ray[newRank]
@@ -34,13 +33,12 @@ def partition(ray, pivot):
 	if len(ray) == 1:
 		return 0,ray
 	for element in ray:
-		if element < ray[pivot]:
+		if element <= ray[pivot]:
 			firstHalf.append(element)
 		else:
 			secondHalf.append(element)
 
-
-
+	firstHalf.remove(ray[pivot])
 	newIndex = len(firstHalf) 
 	ray = firstHalf + [ray[pivot]] + secondHalf
 	return newIndex, ray
